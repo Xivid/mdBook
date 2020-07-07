@@ -504,6 +504,13 @@ pub struct HtmlConfig {
     /// FontAwesome icon class to use for the Git repository link.
     /// Defaults to `fa-github` if `None`.
     pub git_repository_icon: Option<String>,
+    /// Git repository file edit url template, when set shows an
+    /// "Suggest an edit" button for directly jumping to editing the
+    /// currently viewed page in the git repository. Contains {path}
+    /// that is replaced with chapter source file path
+    pub git_repository_edit_url_template: Option<String>,
+    /// Disqus shortname
+    pub disqus_shortname: Option<String>,
     /// Input path for the 404 file, defaults to 404.md, set to "" to disable 404 file output
     pub input_404: Option<String>,
     /// Absolute url to site, used to emit correct paths for the 404 page, which might be accessed in a deeply nested directory
@@ -539,6 +546,8 @@ impl Default for HtmlConfig {
             search: None,
             git_repository_url: None,
             git_repository_icon: None,
+            git_repository_edit_url_template: None,
+            disqus_shortname: None,
             input_404: None,
             site_url: None,
             livereload_url: None,
@@ -744,6 +753,8 @@ mod tests {
             playground: playground_should_be,
             git_repository_url: Some(String::from("https://foo.com/")),
             git_repository_icon: Some(String::from("fa-code-fork")),
+            git_repository_edit_url_template: Some(String::from("https://foo.com/{PATH}")),
+            disqus_shortname: Some(String::from("abc")),
             redirect: vec![
                 (String::from("index.html"), String::from("overview.html")),
                 (

@@ -58,6 +58,22 @@ impl HtmlHandlebars {
             bail!("{} is reserved for internal use", path.display());
         };
 
+        if let Some(ref git_repository_edit_url_template) =
+            ctx.html_config.git_repository_edit_url_template
+        {
+            let full_path = "src/".to_owned() + path.to_str().unwrap();
+            let edit_url = git_repository_edit_url_template.replace("{path}", &full_path);
+            ctx.data
+                .insert("git_repository_edit_url".to_owned(), json!(edit_url));
+        }
+
+        if let Some(ref disqus_shortname) =
+            ctx.html_config.disqus_shortname
+        {
+            ctx.data
+                .insert("disqus_shortname".to_owned(), json!(disqus_shortname));
+        }
+
         let book_title = ctx
             .data
             .get("book_title")

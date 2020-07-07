@@ -140,6 +140,12 @@
                             <i id="git-repository-button" class="fa {{git_repository_icon}}"></i>
                         </a>
                         {{/if}}
+
+                        {{#if git_repository_edit_url}}
+                        <a href="{{git_repository_edit_url}}" title="Edit this page" aria-label="Edit this page">
+                            EDIT THIS PAGE
+                        </a>
+                        {{/if}}
                     </div>
                 </div>
 
@@ -168,6 +174,20 @@
                 <div id="content" class="content">
                     <main>
                         {{{ content }}}
+
+                        {{#if disqus_shortname}}
+                        <h2>Comments</h2>
+                        <div id="disqus_thread"></div>
+                        <script>
+                        (function() {
+                        var d = document, s = d.createElement('script');
+                            s.src = 'https://{{disqus_shortname}}.disqus.com/embed.js';
+                        s.setAttribute('data-timestamp', +new Date());
+                        (d.head || d.body).appendChild(s);
+                        })();
+                        </script>
+                        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                        {{/if}}
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
